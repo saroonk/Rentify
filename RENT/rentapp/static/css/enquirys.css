@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(235, 246, 231);
+    margin: 0;
+    padding: 0;
+    /* filter: blur(2px); */
+
+}
+
+.navbar{
+        background-color: rgb(218, 230, 216);
+
+
+      }
+
+      .nav-item{
+        padding: 0 10px;
+        
+        
+      }
+      .nav-item a{
+        transition: 0.3s;
+      }
+      .nav-item a:hover{
+        color: green;
+        transform: translateX(5px);
+        transform: translatey(2px);
+
+       
+      }
+
+      .nav-link{
+        color: black;
+      }
+
+      .navbar-nav{
+        border: 0.5px solid rgb(167, 186, 158);
+        border-radius: 10px;
+        border-left: none;
+        border-right: none;
+
+      }
+      .navbar-toggler{
+        background-color: rgb(89, 159, 89);
+      }
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #cad7c2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid green;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    
+    gap: 20px; 
+} */
+
+.product-card {
+    background-color: rgb(218, 230, 216);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    flex: 1 1 calc(33% - 20px); 
+    box-shadow: 0 1px 3px rgba(185, 225, 132, 0.2);
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.05); 
+}
+
+.product-name {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.rental-dates {
+    color: #555;
+}
+
+.no-items {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+
+.footer{
+  background-color: rgb(218, 230, 216);
+}

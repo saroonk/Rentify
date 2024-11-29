@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Update</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/userupdate.css' %}">
+
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg py-2 px-4 ">
+        <div class="container-fluid ">
+          <a class="navbar-brand text-success" href="#">
+            <img src="{% static 'images/logo.png' %}" alt="" width="auto" height="50" class="d-inline-block align-text-top" style="mix-blend-mode: multiply;">
+          </a>
+          
+          <button class="navbar-toggler  text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">=</span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0 ">
+              <li class="nav-item ">
+                <a class="nav-link active" aria-current="page" href="/userhome">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/products">Products</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/userprofile">Profile</a>
+              </li>
+              
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/enquiry">Messages</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/myproduct">My Products</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/myrenteditems">Rented Products</a>
+              </li>
+    
+        
+                  
+        
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href="/logout">Log out</a>
+                  </li>
+    
+    
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success bg-success text-light" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+   
+    
+    <div class="container">
+      <div class="row mt-5">
+          <form action="" method="POST" enctype="multipart/form-data" class="row w-100">
+              {% csrf_token %}
+              
+ 
+              <div class="col-lg-5 text-center left position-relative h-xl-50 h-lg-50 ">
+                  {% if view.profile_image %}
+                      <img src="{{ view.profile_image.url }}" alt="Profile Image" class="profile-photo-preview img-fluid w-100 h-lg-100 py-5 px-5" style="object-fit: cover;">
+                      <label for="id_profile_photo" class="btn btn-success position-absolute bottom-0 start-50 translate-middle-x mb-2">
+                          Choose File
+                      </label>
+                      <input type="file" id="id_profile_photo" name="pic" accept="image/*" onchange="previewProfilePhoto(event)" style="display: none;">
+                  {% else %}
+                      <div class="down position-relative">
+                          <img id="profile-photo-preview" class="profile-photo-preview img-fluid w-100 h-100" src="{% static 'images/user-profile.jpg' %}" alt="Add Profile Photo" style="object-fit: cover;">
+                          <label for="id_profile_photo" class="btn btn-success position-absolute bottom-0 start-50 translate-middle-x mb-2">
+                              Choose File
+                          </label>
+                          <input type="file" id="id_profile_photo" name="pic" accept="image/*" onchange="previewProfilePhoto(event)" style="display: none;">
+                      </div>
+                  {% endif %}
+              </div>
+  
+
+              <div class="col-lg-7 right h-xl-75 h-lg-75 p-lg-5">
+                  <label for="input2" class="pb-2 pt-2 ps-5 text-success">FIRST NAME</label><br>
+                  <input type="text" name="fname" value="{{ view.user_id.first_name }} " class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <label for="input3" class="pb-2 ps-5 text-success">LAST NAME</label><br>
+                  <input type="text" name="lname" value="{{ view.user_id.last_name }}" class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <label for="input4" class="pb-2 ps-5 text-success">AGE</label><br>
+                  <input type="number" name="age" value="{{ view.Age }}" class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <label for="input5" class="pb-2 ps-5 text-success">EMAIL</label><br>
+                  <input type="email" name="email" value="{{ view.user_id.email }}" class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <label for="input6" class="pb-2 ps-5 text-success">PHONE NO</label><br>
+                  <input type="number" name="phone" value="{{ view.phone }}" class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <label for="input6" class="pb-2 ps-5 text-success">ADDRESS</label><br>
+                  <input type="text" name="address" value="{{ view.Address }}" class="w-75 px-5 ms-lg-5 text-center mb-lg-2 io"><br>
+                  
+                  <button type="submit" class="btn bg-success text-light ms-lg-5 mt-3 mb-4">UPDATE</button>
+              </div>
+          </form>
+      </div>
+  </div><br><br>
+  
+
+
+
+
+    
+<section class="footer">
+  <div class="container-fluid">
+    <div class="row mt-5 py-4 px-4">
+      <div class="col-md-3">
+        <h3>Rentify</h3>
+        <i class="fas fa-envelope pt-3"></i>
+        
+
+        <span class="">rentify@gmail.com</span> <br>
+
+        <i class="fas fa-phone pt-3" ></i>
+        <span>+91-8089801771</span> <br>
+        
+        <div class="icons pt-3">
+          <i class="fab fa-facebook me-2 "></i>
+          <i class="fab fa-instagram me-2 "></i>
+          <i class="fab fa-twitter me-2 "></i>
+          
+        </div>
+
+
+      </div>
+      <div class="col-md-3">
+        <h3>Category</h3>
+        <p>Vehicles</p>
+        <p>Electronics</p>
+        <p>Electricals</p>
+        <p>Furnictures</p>
+        <p>Equipments</p>
+
+      </div>
+      <div class="col-lg-3">
+        <h3>Quick Links</h3>
+        <p>Privacy policy</p>
+        <p>discussion</p>
+        <p>Terms & condtion</p>
+        <p>Customer Support</p>
+        <p>Rental FAQ's<p>
+
+      </div>
+      <div class="col-lg-3">
+        <h3>Subscribe</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, ad?</p>
+        <input type="text"><br>
+        <button type="button" class="btn bg-success text-light mt-3">Subscribe Now</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+    
+
+    <script>
+        function previewProfilePhoto(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.querySelector('.profile-photo-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script> 
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

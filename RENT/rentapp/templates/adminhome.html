@@ -1,0 +1,114 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/adminhome.css' %}">
+
+   
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row">
+    
+    <div class="sidebar col-md-2">
+        <h4 class="text-white text-center">Admin Panel</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/viewproducts"><i class="fas fa-box"></i> Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/viewusers"><i class="fas fa-users"></i> Users</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-chart-line"></i> Reports</a>
+            </li> -->
+           
+            <li class="nav-item">
+                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+  
+    <div class="content col-md-10">
+        <header class="d-flex justify-content-between align-items-center">
+            <h2>Dashboard</h2>
+            <div>
+                <button class="btn btn-primary"><a href="/viewcategory" class="text-white" style="text-decoration: none;">CATEGORY</a></button>
+            </div>
+        </header>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Rentals Product</h5>
+                        <p class="card-text">{{ y1 }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Users</h5>
+                        <p class="card-text">{{ x1 }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Requests</h5>
+                        <p class="card-text">{{ count }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mt-4">Recent Rentals</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Product</th>
+                    <th>Rental Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for i in z1 %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.username.first_name }}</td>
+                    <td>{{ i.product.Product_name }}</td>
+                    <td>{{ i.to_date }}</td>
+                    {% if i.status == 1 %}
+                    <td><span class="badge badge-success">Completed</span></td>
+                    {% else %}
+                    <td><span class="badge badge-warning">Pending</span></td>
+                    {% endif %}
+                </tr>
+               
+                {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

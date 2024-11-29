@@ -1,0 +1,50 @@
+body {
+    background-color: #e8f5e9; 
+
+  color: #333;
+}
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-label {
+  font-weight: bold;
+}
+.btn-submit {
+  background-color: #28a745;
+  color: white;
+}
+.btn-submit:hover {
+  background-color: #218838;
+}
+
+
+.file-upload {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+
+
+.preview-image {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 5px;
+}
+#preview-container {
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

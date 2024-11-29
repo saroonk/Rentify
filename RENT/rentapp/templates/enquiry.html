@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/enquirys.css' %}">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg py-4 px-4 ">
+        <div class="container-fluid ">
+          <a class="navbar-brand text-success" href="#">
+            <img src="{% static 'images/logo.png' %}" alt="" width="auto" height="50" class="d-inline-block align-text-top" style="mix-blend-mode: multiply;">
+          </a>
+          
+          <button class="navbar-toggler  text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">=</span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0 ">
+              <li class="nav-item ">
+                <a class="nav-link active" aria-current="page" href="/userhome">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/products">Products</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/userprofile">Profile</a>
+              </li>
+              
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/enquiry">Messages</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/myproduct">My Products</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="/myrenteditems">Rented Products</a>
+              </li>
+    
+        
+                  
+        
+                  <li class="nav-item">
+                    <a class="nav-link text-danger" href="/logout">Log out</a>
+                  </li>
+    
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success bg-success text-light" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+    <div class="container">
+        <h1>Rental <span class="text-success">Requests</span> </h1>
+        <hr>
+
+
+
+        <div class="row">
+            {% for i in x1 %}
+            <div class="col-lg-12 mb-5">
+            <div class="product-card">
+                <p class="product-name">Product Name: <span class="text-success fs-4">{{ i.product.Product_name }}</span></p>
+                <p class="rental-dates">From: {{ i.from_date }}</p>
+                <p class="rental-dates">To: {{ i.to_date }}</p>
+
+                
+
+
+                {% if i.status == 0 %}
+                <a href="/confirmrequest/{{ i.id }}" class="btn bg-success text-light">confirm</a>
+                <a href="/removerequest/{{ i.id }}" class="btn bg-danger text-light">Delete</a>
+
+
+
+                {% elif i.is_returned and i.return_status == "Pending" %}
+
+
+              <div class="text-center mt-lg-3">
+                <p class="text-dark">{{ i.username.first_name|upper}} has submited the rented product</p>
+                <p class="text-success">Did you received your {{ i.product.Product_name|upper}}  back?</p>
+
+                <a href="/receivedproduct/{{ i.id }}" class="btn bg-success text-light px-3 me-2">Receieved</a> 
+                <a href="/notreceivedproduct/{{ i.id }}" class="btn bg-danger text-light">Not Received</a>
+              </div>  
+
+
+              {% elif i.is_returned and i.return_status == "Approved" %}
+
+
+
+
+            <div class="text-center mt-lg-3">
+              
+              <p class="text-success"> {{ i.product.Product_name|upper}} has been <span class="text-danger">recieved</span> succesfully</p>
+
+              <span class="btn bg-success text-light me-2 px-3 py-2" style="pointer-events: none;">Received</span>
+            </div>  
+            <p class="text-muted mt-5">Note:if you didnt receive the product click here:
+              <a href="/notreceivedproduct/{{ i.id }}" class="text-primary text-decoration-none">Not Received</a>
+
+            </p>
+            <!-- <p class="text-muted mt-2">Remove the rental history:
+              <a href="/notreceivedproduct/{{ i.id }}" class=" text-decoration-none" style="color: blueviolet;">Clear History</a>
+
+            </p> -->
+            <!-- <i class="fas fa-trash"></i> -->
+             <a href="/removehistory/{{ i.id }}">remove history</a>
+
+
+
+
+            {% elif i.is_returned == 0 and i.return_status == "Disapproved" %}
+
+
+
+
+            <div class="text-center mt-lg-3">
+              
+              <p class="text-danger">The rented item {{ i.product.Product_name|upper}} didn't received. A message has been sented about this problem </p>
+
+
+              <span class="btn bg-danger text-light me-2 px-3 py-2" style="pointer-events: none;">Not Received</span>
+              <p class="text-muted mt-5">Note:if you  received the product, please click here:
+                <a href="/receivedproduct/{{ i.id }}" class="text-primary text-decoration-none">Received</a> 
+  
+              </p>
+  
+
+            </div>  
+
+                
+
+                {% elif i.status == 1 %}
+                                
+                <div class="text-center mt-lg-3">
+              
+                  <p class="text-success">The rental request has been succesfully approved</p>
+    
+                  <span class="btn bg-success text-light me-2 px-3 py-2" style="pointer-events: none;">Approved</span>
+                </div>  
+                <p class="text-muted mt-5">Note:if you want disapprove the request, click here:
+                  <a href="/disaproverequest/{{ i.id }}" class="text-primary text-decoration-none">Disapprove request</a>
+    
+                </p>
+
+
+
+                
+                
+                
+
+                {% endif %}
+
+
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+
+    
+
+
+  
+<section class="footer">
+  <div class="container-fluid ">
+    <div class="row mt-5 py-4 px-4">
+      <div class="col-md-3">
+        <h3>Rentify</h3>
+        <i class="fas fa-envelope pt-3"></i>
+        
+
+        <span class="">rentify@gmail.com</span> <br>
+
+        <i class="fas fa-phone pt-3" ></i>
+        <span>+91-8089801771</span> <br>
+        
+        <div class="icons pt-3">
+          <i class="fab fa-facebook me-2 "></i>
+          <i class="fab fa-instagram me-2 "></i>
+          <i class="fab fa-twitter me-2 "></i>
+          
+        </div>
+
+
+      </div>
+      <div class="col-md-3">
+        <h3>Category</h3>
+        <p>Vehicles</p>
+        <p>Electronics</p>
+        <p>Electricals</p>
+        <p>Furnictures</p>
+        <p>Equipments</p>
+
+      </div>
+      <div class="col-lg-3">
+        <h3>Quick Links</h3>
+        <p>Privacy policy</p>
+        <p>discussion</p>
+        <p>Terms & condtion</p>
+        <p>Customer Support</p>
+        <p>Rental FAQ's<p>
+
+      </div>
+      <div class="col-lg-3">
+        <h3>Subscribe</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, ad?</p>
+        <input type="text"><br>
+        <button type="button" class="btn bg-success text-light mt-3">Subscribe Now</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+      
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
+

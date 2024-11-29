@@ -1,0 +1,61 @@
+.navbar{
+    background-color: rgb(218, 230, 216);
+
+
+  }
+
+  .nav-item{
+    padding: 0 10px;
+    
+    
+  }
+  .nav-item a{
+    transition: 0.3s;
+  }
+  .nav-item a:hover{
+    color: green;
+    transform: translateX(5px);
+    transform: translatey(2px);
+
+   
+  }
+
+  .nav-link{
+    color: black;
+  }
+
+  .navbar-nav{
+    border: 0.5px solid rgb(167, 186, 158);
+    border-radius: 10px;
+    border-left: none;
+    border-right: none;
+
+  }
+  .navbar-toggler{
+    background-color: rgb(89, 159, 89);
+  }
+
+  .footer{
+    background-color: rgb(218, 230, 216);
+    
+    
+
+  }
+
+
+    .right{
+        border: 1px solid grey;
+    }
+
+    .left{
+        border: 1px solid grey;
+
+    }
+
+    .io{
+        height: 50px;
+        
+    }
+    .io:hover{
+        border: 3px solid green;
+    }

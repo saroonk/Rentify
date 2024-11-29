@@ -1,0 +1,65 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/Viewusers.css' %}">
+
+    
+</head>
+<body>
+
+
+    <div class="header">
+        <h1 >Product Management</h1>
+        <a href="/adminhome" class="btn btn-secondary back-btn">Back to Dashboard</a>
+    
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            {% for i in x1 %}
+            <div class="col-sm-4 col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                     
+                        {% if i.profile_image %}
+                            <img src="{{ i.profile_image.url }}" alt="Profile Image" class="profile-img mb-3">
+                        {% else %}
+                            <img src="{% static 'images/user-profile.jpg' %}" alt="Default Profile Image" class="profile-img mb-3">
+                        {% endif %}
+                     
+                        <h5 class="card-title">{{ i.user_id.first_name }} {{ i.last_name }}</h5>
+                        
+
+                  
+                        <div class="details">
+                            <p><strong>Age:</strong> {{ i.Age }}</p>
+                            <p><strong>Email:</strong> {{ i.user_id.email }}</p>
+                            <p><strong>Phone:</strong> {{ i.phone }}</p>
+                            <p><strong>Address:</strong> {{ i.Address }}</p>
+                            <p><strong>Username:</strong> {{ i.user_id.username }}</p>
+
+                        </div>
+                        <button class="btn btn-danger"><a href="/removeuser/{{i.id}} " class="text-light text-decoration-none">Remove</a></button>
+
+
+               
+                      
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
