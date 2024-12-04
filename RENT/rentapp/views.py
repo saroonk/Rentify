@@ -316,7 +316,16 @@ def receivedproduct(request,rid):
     x=RENTITEM.objects.get(id=rid)
     x.is_returned=True
     x.return_status = "Approved"
+
+
+    p=x.product_id
+    y=PRODUCT.objects.get(id=p)
+    qa=y.quantity_available
+    qa+=1
+    y.quantity_available=qa
+    y.save()
     x.save()
+
     return redirect(enquiry)
 
 def notreceivedproduct(request,nid):
@@ -326,6 +335,20 @@ def notreceivedproduct(request,nid):
     x.save()
     return redirect(enquiry)
 
+
+def notreceivedproductincrement(request,nid):
+    x=RENTITEM.objects.get(id=nid)
+    x.is_returned=False
+    x.return_status = "Disapproved"
+
+    p=x.product_id
+    y=PRODUCT.objects.get(id=p)
+    qa=y.quantity_available
+    qa-=1
+    y.quantity_available=qa
+    y.save()
+    x.save()
+    return redirect(enquiry)
 
 
 
@@ -351,7 +374,6 @@ def confirmrequest(request,cid):
     elif y.quantity_available == 1:
         
         qa=y.quantity_available
-        print(qa)
         qa-=1
         y.quantity_available=qa
         y.is_available=False

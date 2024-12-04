@@ -58,6 +58,9 @@ urlpatterns = [
     path('receivedproduct/<int:rid>',views.receivedproduct,name='receivedproduct'),
     path('notreceivedproduct/<int:nid>',views.notreceivedproduct,name='notreceivedproduct'),
 
+    path('notreceivedproductincrement/<int:nid>',views.notreceivedproductincrement,name='notreceivedproductincrement'),
+
+
     path('removehistory/<int:rid>',views.removehistory,name='removehistory'),
 
 

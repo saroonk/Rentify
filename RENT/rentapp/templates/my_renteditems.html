@@ -110,18 +110,24 @@
                 <a href="/cancelreturn/{{ i.id }}" class="text-decoration-none btn bg-danger text-light">Cancel Return</a>
 
                 {% elif i.is_returned and i.return_status == "Approved" %}
-                <button class="btn-buy stockk" style="background-color: rgb(12, 130, 71);">
+                <!-- <button class="btn-buy stockk" style="background-color: rgb(12, 130, 71);">
                   <span class="text-decoration-none text-light">Return Approved</span>
-                </button>
+                </button> -->
+                <h3 class="text-success" style="font-weight: 800;">Product returned succesfully</h3>
+                <!-- <p class="text-muted text-center">Click here to remove the history</p>
+                <p class="text-center">DELETE</p> -->
+
                 {% elif i.is_returned == 0 and i.return_status == "Disapproved" %}
-                <button class="btn-buy stockk" style="background-color: rgb(220, 38, 38);">
+                <!-- <button class="btn-buy stockk" style="background-color: rgb(220, 38, 38);">
                   <span class="text-decoration-none text-light">Return Disapproved</span>
-                </button>
+                </button> -->
+                <h4 class="text-danger">Return has been failed</h4>
+                <p class="text-muted">Cancel your return and resubmit again after confirming.</p>
                 <button class="btn-buy  bg-success">
                 <a href="/cancelreturn/{{ i.id }}" class="text-decoration-none text-light">Cancel Return</a>
 
                 </button>
-                <p class="text-danger mt-3">The product hasn't received at owners side. Confirm your side  and return the product</p>
+                <p class="text-danger mt-3 ">The product hasn't received at owners side. Confirm your side  and return the product</p>
                 {% else %}
               
                     
