@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from rentapp.models import CATEGORY,USERSDETAILS,PRODUCT,User,RENTITEM
 from django.contrib.auth import authenticate,login,logout
 from datetime import datetime
+from django.contrib import messages
 
 
 
@@ -18,8 +19,8 @@ def adminhome(request):
 
 def logins(request):
     if request.method=='POST':
-        USERNAME=request.POST['uname']
-        PASSWORD=request.POST['upass']
+        USERNAME=request.POST.get('uname')
+        PASSWORD=request.POST.get('upass')
         userpass= authenticate(request,username=USERNAME,password=PASSWORD)
         if userpass is not None and userpass.is_superuser==1:
             return redirect(adminhome)
@@ -28,7 +29,8 @@ def logins(request):
             request.session['user_id']=userpass.id
             return redirect(userhome)
         else:
-            return HttpResponse("INAVALID USER NAME OR PASSWORD")
+            messages.error(request, "INVALID USER NAME OR PASSWORD")
+            return render(request, 'login.html')
     else:
         return render(request,'login.html')
 
@@ -68,19 +70,19 @@ def removecategory(request,cid):
 def userreg(request):
     if request.method=='POST':
         pic=request.FILES.get('img')
-        fn=request.POST['fname']
-        ln=request.POST['lname']
-        age=request.POST['age']
-        em=request.POST['email']
-        ph=request.POST['phone']
-        add=request.POST['address']
-        un=request.POST['un']
-        ps=request.POST['ps']
+        fn=request.POST.get('fname')
+        ln=request.POST.get('lname')
+        age=request.POST.get('age')
+        em=request.POST.get('email')
+        ph=request.POST.get('phone')
+        add=request.POST.get('address')
+        un=request.POST.get('un')
+        ps=request.POST.get('ps')
         x=User.objects.create_user(first_name=fn,last_name=ln,password=ps,username=un,email=em,usertype='USER')
         x.save()
         y=USERSDETAILS.objects.create(user_id=x,profile_image=pic,Age=age,phone=ph,Address=add)
         y.save()
-        return render(request,"login.html")
+        return redirect(logins)
     else:
 
         return render(request,'user_registration.html')
